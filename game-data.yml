@@ -1,0 +1,88 @@
+game-1:
+  hole-1:
+    Alexander: 16
+    Genevieve: 22
+  hole-2:
+    Alexander: 21
+    Genevieve: 56
+  hole-3:
+    Alexander: 37
+    Genevieve: 66
+  hole-4:
+    Alexander: 67
+    Genevieve: 75
+  hole-5:
+    Alexander: 83
+    Genevieve: 82
+  hole-6:
+    Alexander: 97
+    Genevieve: 97
+  hole-7:
+    Alexander: 101
+    Genevieve: 111
+  hole-8:
+    Alexander: 109
+    Genevieve: 113
+  hole-9:
+    Alexander: 123
+    Genevieve: 122
+game-2:
+  hole-1:
+    Alexander: 5
+    Genevieve: 13
+  hole-2:
+    Alexander: 7
+    Genevieve: 50
+  hole-3:
+    Alexander: 19
+    Genevieve: 64
+  hole-4:
+    Alexander: 19
+    Genevieve: 62
+  hole-5:
+    Alexander: 37
+    Genevieve: 63
+  hole-6:
+    Alexander: 47
+    Genevieve: 71
+  hole-7:
+    Alexander: 49
+    Genevieve: 70
+  hole-8:
+    Alexander: 60
+    Genevieve: 70
+  hole-9:
+    Alexander: 97
+    Genevieve: 73
+game-3:
+  hole-1:
+    Alexander: 12
+    Genevieve: 1
+  hole-2:
+    Alexander: 36
+    Genevieve: 3
+  hole-3:
+    Alexander: 70
+    Genevieve: 15
+  hole-4:
+    Alexander: 284
+    Genevieve: 27
+  hole-5:
+    Alexander: 318
+    Genevieve: 39
+  hole-6:
+    Alexander: 352
+    Genevieve: 51
+  hole-7:
+    Alexander: 586
+    Genevieve: 63
+  hole-8:
+    Alexander: 590
+    Genevieve: 75
+  hole-9:
+    Alexander: 592
+    Genevieve: 76
+wins:
+  Alexander: 0
+  Genevieve: 3
+  Tied: 0
