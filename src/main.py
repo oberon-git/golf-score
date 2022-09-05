@@ -99,9 +99,11 @@ def game_over(data, h, repo):
     g_wins, a_wins, ties = data.get_wins()
     print("No One" if winner == "Tied" else winner, "Wins!")
     print("Game Over")
+    print()
     print("Genevieve Has Won", g_wins, "Times")
     print("Alexander Has Won", a_wins, "Times")
     print("There Have Been", ties, "Ties")
+    print()
     again = input("Play Again? (Y/N) ").upper()
     if again == "Y":
         data.create_new_game()
@@ -112,7 +114,7 @@ def game_over(data, h, repo):
 
 def git_push(repo):
     repo.git.add(update=True)
-    repo.index.commit("Commit")
+    repo.index.commit("Commit From Python")
     origin = repo.remote(name="origin")
     origin.push()
 
