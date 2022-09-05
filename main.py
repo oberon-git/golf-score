@@ -5,11 +5,11 @@ from git import Repo
 
 class GameData:
     def __init__(self):
-        if not os.path.exists("../game-data.yml"):
-            open("../game-data.yml", 'w').close()
+        if not os.path.exists("game-data.yml"):
+            open("game-data.yml", 'w').close()
             self.data = {}
         else:
-            with open("../game-data.yml", 'r') as file:
+            with open("game-data.yml", 'r') as file:
                 self.data = yaml.safe_load(file)
         if "wins" not in self.data:
             self.data["wins"] = {"Genevieve": 0, "Alexander": 0, "Tied": 0}
@@ -46,9 +46,9 @@ class GameData:
         return self.data[game][hole]["Genevieve"], self.data[game][hole]["Alexander"]
 
     def update(self):
-        with open("../game-data.yml", 'w') as file:
+        with open("game-data.yml", 'w') as file:
             file.write(yaml.safe_dump(self.data))
-        with open("../game-data.yml", 'r') as file:
+        with open("game-data.yml", 'r') as file:
             self.data = yaml.safe_load(file)
 
     def get_winner(self):
@@ -130,7 +130,7 @@ def play(data, h):
 
 
 def start():
-    repo = Repo("../.git")
+    repo = Repo(".git")
     repo.git.pull()
     return GameData(), 1, repo
 
