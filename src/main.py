@@ -130,7 +130,7 @@ def play(data, h):
 
 
 def start():
-    repo = Repo("/Local Files/Repos/golf-score/.git")
+    repo = Repo("../.git")
     repo.git.pull()
     return GameData(), 1, repo
 
