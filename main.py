@@ -1,8 +1,8 @@
 import os
+import sys
 import yaml
 from git import Repo
 from termcolor import colored
-
 
 class GameData:
     def __init__(self):
@@ -141,6 +141,10 @@ def play(data, h):
 
 
 def start():
+    if os.name == "nt":
+        os.system("cls")
+    else:
+        os.system("clear")
     repo = Repo(".git")
     repo.git.pull()
     return GameData(), 1, repo
