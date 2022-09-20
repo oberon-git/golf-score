@@ -82,7 +82,7 @@ def get_score():
     g_score = a_score = None
     while g_score is None:
         try:
-            g_score = input(colored("\tGenevieve's", "magenta"), "Score: ").upper()
+            g_score = input(colored("\tGenevieve's", "magenta") + " Score: ").upper()
             if g_score == "EXIT" or g_score == "QUIT":
                 return None
             g_score = int(g_score)
@@ -91,7 +91,7 @@ def get_score():
             print(colored("Enter a number", "red"))
     while a_score is None:
         try:
-            a_score = input(colored("\tAlexander's", "blue"), "Score: ").upper()
+            a_score = input(colored("\tAlexander's", "blue") + " Score: ").upper()
             if a_score == "EXIT" or a_score == "QUIT":
                 return None
             a_score = int(a_score)
