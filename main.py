@@ -129,7 +129,7 @@ def play(data, h):
     print("Hole", h)
     score = get_score()
     if score is None:
-        print("Exiting")
+        print(colored("Exiting", "red"))
         data.abort()
         return 11
     data.add_score(h, score)
