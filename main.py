@@ -76,18 +76,27 @@ class GameData:
             self.data[game]["hole-" + str(h)] = {"Genevieve": 0, "Alexander": 0}
         self.update()
 
+    def abort(self):
+        self.data
+
 
 def get_score():
     g_score = a_score = None
     while g_score is None:
         try:
-            g_score = int(input("\tGenevieve's Score: "))
+            g_score = input("\tGenevieve's Score: ")
+            if g_score.lower() == "exit" or g_score.lower() == "quit":
+                return None
+            g_score = int(g_score)
         except ValueError:
             g_score = None
             print("Enter a number")
     while a_score is None:
         try:
-            a_score = int(input("\tAlexander's Score: "))
+            a_score = input("\tAlexander's Score: ")
+            if a_score.lower() == "exit" or a_score.lower() == "quit":
+                return None
+            a_score = int(a_score)
         except ValueError:
             a_score = None
             print("Enter a number")
@@ -121,7 +130,11 @@ def git_push(repo):
 
 def play(data, h):
     print("Hole", h)
-    data.add_score(h, get_score())
+    score = get_score()
+    if not score:
+        data.abort()
+        return 11
+    data.add_score(h, score)
     score = data.get_score(h)
     print("\tThe Score Is:")
     print("\t\tGenevieve -", score[0])
