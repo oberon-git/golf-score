@@ -55,9 +55,9 @@ class GameData:
         g_score = score["Genevieve"]
         a_score = score["Alexander"]
         if g_score < a_score:
-            winner = "Genevieve"
+            winner = colored("Genevieve", "magenta")
         elif a_score < g_score:
-            winner = "Alexander"
+            winner = colored("Alexander", "blue")
         else:
             winner = "Tied"
         self.data["wins"][winner] += 1
@@ -82,22 +82,22 @@ def get_score():
     g_score = a_score = None
     while g_score is None:
         try:
-            g_score = input("\tGenevieve's Score: ")
-            if g_score.lower() == "exit" or g_score.lower() == "quit":
+            g_score = input(colored("\tGenevieve's", "magenta"), "Score: ").upper()
+            if g_score == "EXIT" or g_score == "QUIT":
                 return None
             g_score = int(g_score)
         except ValueError:
             g_score = None
-            print("Enter a number")
+            print(colored("Enter a number", "red"))
     while a_score is None:
         try:
-            a_score = input("\tAlexander's Score: ")
-            if a_score.lower() == "exit" or a_score.lower() == "quit":
+            a_score = input(colored("\tAlexander's", "blue"), "Score: ").upper()
+            if a_score == "EXIT" or a_score == "QUIT":
                 return None
             a_score = int(a_score)
         except ValueError:
             a_score = None
-            print("Enter a number")
+            print(colored("Enter a number", "red"))
     return g_score, a_score
 
 
@@ -128,7 +128,8 @@ def git_push(repo):
 def play(data, h):
     print("Hole", h)
     score = get_score()
-    if not score:
+    if score is None:
+        print("Exiting")
         data.abort()
         return 11
     data.add_score(h, score)
