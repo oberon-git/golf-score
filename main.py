@@ -1,6 +1,7 @@
 import os
 import yaml
 from git import Repo
+from termcolor import colored
 
 
 class GameData:
@@ -16,34 +17,32 @@ class GameData:
         self.current_game = 1
         while "game-" + str(self.current_game) in self.data:
             self.current_game += 1
-        game = "game-" + str(self.current_game)
-        self.data[game] = {}
+        self.game = "game-" + str(self.current_game)
+        self.data[self.game] = {}
         self.create_default_holes()
 
     def create_new_game(self):
         self.current_game += 1
-        game = "game-" + str(self.current_game)
-        self.data[game] = {}
+        self.game = "game-" + str(self.current_game)
+        self.data[self.game] = {}
         self.create_default_holes()
 
     def add_score(self, h, score):
-        game = "game-" + str(self.current_game)
         hole = "hole-" + str(h)
         if h == 1:
-            self.data[game][hole]["Genevieve"] = score[0]
-            self.data[game][hole]["Alexander"] = score[1]
+            self.data[self.game][hole]["Genevieve"] = score[0]
+            self.data[self.game][hole]["Alexander"] = score[1]
         else:
             previous_hole = "hole-" + str(h - 1)
-            g_score = self.data[game][previous_hole]["Genevieve"]
-            a_score = self.data[game][previous_hole]["Alexander"]
-            self.data[game][hole]["Genevieve"] = g_score + score[0]
-            self.data[game][hole]["Alexander"] = a_score + score[1]
+            g_score = self.data[self.game][previous_hole]["Genevieve"]
+            a_score = self.data[self.game][previous_hole]["Alexander"]
+            self.data[self.game][hole]["Genevieve"] = g_score + score[0]
+            self.data[self.game][hole]["Alexander"] = a_score + score[1]
         self.update()
 
     def get_score(self, h):
-        game = "game-" + str(self.current_game)
         hole = "hole-" + str(h)
-        return self.data[game][hole]["Genevieve"], self.data[game][hole]["Alexander"]
+        return self.data[self.game][hole]["Genevieve"], self.data[self.game][hole]["Alexander"]
 
     def update(self):
         with open("game-data.yml", 'w') as file:
@@ -52,8 +51,7 @@ class GameData:
             self.data = yaml.safe_load(file)
 
     def get_winner(self):
-        game = "game-" + str(self.current_game)
-        score = self.data[game]["hole-9"]
+        score = self.data[self.game]["hole-9"]
         g_score = score["Genevieve"]
         a_score = score["Alexander"]
         if g_score < a_score:
@@ -71,13 +69,13 @@ class GameData:
         return wins["Genevieve"], wins["Alexander"], wins["Tied"]
 
     def create_default_holes(self):
-        game = "game-" + str(self.current_game)
         for h in range(1, 10):
-            self.data[game]["hole-" + str(h)] = {"Genevieve": 0, "Alexander": 0}
+            self.data[self.game]["hole-" + str(h)] = {"Genevieve": 0, "Alexander": 0}
         self.update()
 
     def abort(self):
-        self.data
+        del self.data[self.game]
+        self.update()
 
 
 def get_score():
@@ -103,21 +101,20 @@ def get_score():
     return g_score, a_score
 
 
-def game_over(data, h, repo):
+def game_over(data, h):
     winner = data.get_winner()
     g_wins, a_wins, ties = data.get_wins()
     print("No One" if winner == "Tied" else winner, "Wins!")
     print("Game Over")
     print()
-    print("Genevieve Has Won", g_wins, "Times")
-    print("Alexander Has Won", a_wins, "Times")
+    print(colored("Genevieve", "magenta"), "Has Won", g_wins, "Times")
+    print(colored("Alexander", "blue"), "Has Won", a_wins, "Times")
     print("There Have Been", ties, "Ties")
     print()
     again = input("Play Again? (Y/N) ").upper()
     if again == "Y":
         data.create_new_game()
         h = 1
-    git_push(repo)
     return h
 
 
@@ -137,8 +134,8 @@ def play(data, h):
     data.add_score(h, score)
     score = data.get_score(h)
     print("\tThe Score Is:")
-    print("\t\tGenevieve -", score[0])
-    print("\t\tAlexander -", score[1])
+    print(colored("\t\tGenevieve", "magenta"), "-", score[0])
+    print(colored("\t\tAlexander", "blue"), "-", score[1])
     return h + 1
 
 
@@ -150,12 +147,16 @@ def start():
 
 def main():
     data, h, repo = start()
-    while h < 10:
-        h = play(data, h)
-        if h == 10:
-            h = game_over(data, h, repo)
+    try:
+        while h < 10:
+            h = play(data, h)
+            if h == 10:
+                h = game_over(data, h)
+    except Exception as e:
+        print(e)
+        data.abort()
+    git_push(repo)
 
 
 if __name__ == "__main__":
     main()
-
