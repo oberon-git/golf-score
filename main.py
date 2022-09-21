@@ -1,8 +1,8 @@
 import os
-import sys
 import yaml
 from git import Repo
 from termcolor import colored
+
 
 class GameData:
     def __init__(self):
