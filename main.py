@@ -55,9 +55,9 @@ class GameData:
         g_score = score["Genevieve"]
         a_score = score["Alexander"]
         if g_score < a_score:
-            winner = colored("Genevieve", "magenta")
+            winner = "Genevieve"
         elif a_score < g_score:
-            winner = colored("Alexander", "blue")
+            winner = "Alexander"
         else:
             winner = "Tied"
         self.data["wins"][winner] += 1
@@ -104,9 +104,13 @@ def get_score():
 def game_over(data, h):
     winner = data.get_winner()
     g_wins, a_wins, ties = data.get_wins()
-    print("No One" if winner == "Tied" else winner, "Wins!")
-    print("Game Over")
-    print()
+    print("Game Over!")
+    if winner == "Genevieve":
+        print(colored("Genevieve", "magenta"), "Wins!!")
+    elif winner == "Alexander":
+        print(colored("Alexander", "blue"), "Wins!!")
+    else:
+        print("It's A Tie!!")
     print(colored("Genevieve", "magenta"), "Has Won", g_wins, "Times")
     print(colored("Alexander", "blue"), "Has Won", a_wins, "Times")
     print("There Have Been", ties, "Ties")
