@@ -166,7 +166,35 @@ game-6:
   hole-9:
     Alexander: 104
     Genevieve: 115
+game-7:
+  hole-1:
+    Alexander: 11
+    Genevieve: 1
+  hole-2:
+    Alexander: 32
+    Genevieve: 20
+  hole-3:
+    Alexander: 36
+    Genevieve: 23
+  hole-4:
+    Alexander: 46
+    Genevieve: 36
+  hole-5:
+    Alexander: 59
+    Genevieve: 44
+  hole-6:
+    Alexander: 83
+    Genevieve: 43
+  hole-7:
+    Alexander: 96
+    Genevieve: 66
+  hole-8:
+    Alexander: 106
+    Genevieve: 68
+  hole-9:
+    Alexander: 109
+    Genevieve: 79
 wins:
   Alexander: 2
-  Genevieve: 4
+  Genevieve: 5
   Tied: 0
